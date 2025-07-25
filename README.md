@@ -10,8 +10,8 @@ Materials for the Fall 2025 PSU One Health Microbiome Center KickStart Workshop.
 ### Organizers
 - Molly Bletz	(mcb6342@psu.edu)
 - Francisco Dini-Andreote	(adreote@psu.edu)
-- Emily Davenport	(chair) (exd44@psu.edu)
-- Grace Deitzler	(dfd5230@psu.edu)
+- Emily Davenport	(co-chair) (exd44@psu.edu)
+- Grace Deitzler (co-chair)	(dfd5230@psu.edu)
 - Liana Burghardt 	(liana.burghardt@psu.edu)
 - Estelle Couradeau	(efc5279@psu.edu) 
 - Darrell Cockburn	(dwc30@psu.edu)
@@ -20,7 +20,11 @@ Materials for the Fall 2025 PSU One Health Microbiome Center KickStart Workshop.
 - David Koslicki	(dmk333@psu.edu)
 
 ### TAs:
-
+- Theo Newbold  (castrocln68@psu.edu)
+- Melanie Medina Lopez  (mkm6258@psu.edu)
+- Jessi Gaydos  (jee5055@psu.edu)
+- Hanh Tran  (hanh.tran@psu.edu)
+- Kayla Clouse  (kaylamclouse@psu.edu)
 
 ## Requirements
 A PSU email and access to Penn State’s Roar Collab system is required prior to the workshop. You can do this by going to https://accounts.aci.ics.psu.edu, and entering your information.  For the purposes of this workshop, please list Emily Davenport (exd44@psu) as your account sponsor and put "2025 Microbiome Center Summer Workshop" into the "Research Description" field of the account request form. 
