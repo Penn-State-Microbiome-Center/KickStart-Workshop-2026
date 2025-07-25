@@ -21,7 +21,7 @@ Materials for the Fall 2025 PSU One Health Microbiome Center KickStart Workshop.
 
 ### TAs:
 - Theo Newbold  (castrocln68@psu.edu)
-- Melanie Medina Lopez  (mkm6258@psu.edu)
+- Melanie Medina Lopez  (mkm6528@psu.edu)
 - Jessi Gaydos  (jee5055@psu.edu)
 - Hanh Tran  (hanh.tran@psu.edu)
 - Kayla Clouse  (kaylamclouse@psu.edu)
