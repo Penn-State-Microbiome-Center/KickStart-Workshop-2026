@@ -4,7 +4,7 @@ Materials for the Fall 2025 PSU One Health Microbiome Center KickStart Workshop.
 
 ## Details
 **Dates**: August 5 - 8, 2025  (Optional intro to Unix/R on August 5th, Full workshop August 6 - 8th)  
-**Times**: August 5th: 1pm - 4pm; August 6 - 8th: 9am - 4pm  
+**Times**: August 5th: 1pm - 4pm; August 6 - 7th: 9am - 4pm; August 8th: 10am - 4pm    
 **Location**: Life Sciences 010 (in person only)
 
 ### Organizers
@@ -16,7 +16,6 @@ Materials for the Fall 2025 PSU One Health Microbiome Center KickStart Workshop.
 - Estelle Couradeau	(efc5279@psu.edu) 
 - Darrell Cockburn	(dwc30@psu.edu)
 - Erika Ganda		(ganda@psu.edu)
-- Josh Kellogg 		(jjk6146@psu.edu)
 - David Koslicki	(dmk333@psu.edu)
 
 ### TAs:
@@ -36,5 +35,4 @@ A laptop is also required for the workshop. You can either bring your own or ema
 - Day 1 (9am - 4pm): Intro + [Basics of Microbiome Analysis - From Planning to Sequencing](/Day1-MicrobiomeAnalysisBasics) - Organizing Committee 
 - Day 2 (9am - 10pm): [Studying Symbiosis through Sequencing](/Day2-AmpliconR) - Liana Burghardt 
 - Day 2 (10am - 4pm): [Amplicon Data Analysis in R](/Day2-AmpliconR) - Erika Ganda
-- Day 3 (9am - 10am): [Metabolomics](/Day3-Shotgun) - Josh Kellogg
 - Day 3 (10am - 4pm): [Shotgun data analysis (assembly, binning, and profiling)](Day3-Shotgun/README.md) - David Koslicki
