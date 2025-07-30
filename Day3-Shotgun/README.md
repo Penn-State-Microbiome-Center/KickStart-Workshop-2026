@@ -1,8 +1,4 @@
-# Day 3: Metabolomics and Metagenomics
-
-## Metabolomics:
-
-Intro to Metabolomics (Josh Kellogg) - [pdf](MicrobiomeKickstartLecture_Kellogg.pdf)
+# Day 3: Metagenomics
 
 ## Whole genome shotgun metagenomics analysis
 
