@@ -34,7 +34,7 @@ Then download the data
 cd data
 wget -i https://raw.githubusercontent.com/Penn-State-Microbiome-Center/KickStart-Workshop-2022/main/Day5-Shotgun/Data/file_list.txt  #<<-- downloads the data from github
 ls *.gz | xargs -P6 -I{} gunzip {}  #<<-- decompresses the data in parallel
-wget https://raw.githubusercontent.com/Penn-State-Microbiome-Center/KickStart-Workshop-2024/main/Day3-Shotgun/Data/sample_002.fna
+wget https://raw.githubusercontent.com/Penn-State-Microbiome-Center/KickStart-Workshop-2024/main/Day3-Shotgun/Data/sample_001.fna
 wget https://raw.githubusercontent.com/Penn-State-Microbiome-Center/KickStart-Workshop-2024/main/Day3-Shotgun/Data/sample_002.fna
 cd ..  #<<-- move back up a directory
 ```
