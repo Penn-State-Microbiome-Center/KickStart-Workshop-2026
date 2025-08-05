@@ -16,7 +16,7 @@
 
 ## Resources
 - [Roar Collab Users' Guide](https://www.icds.psu.edu/roar-collab-user-guide/)
-- [Roar Open OnDemand Portal](https://rcportal.hpc.psu.edu)
+- [Roar Open OnDemand Portal](https://portal.hpc.psu.edu)
 - [Unix cheat sheet](https://www.alexji.com/UNIXCheatSheet.pdf)
 - [Base R cheat sheet](https://iqss.github.io/dss-workshops/R/Rintro/base-r-cheat-sheet.pdf)
 
