@@ -7,8 +7,8 @@
 ## Activation on OpenDemand
 If you are taking part in the workshop, use the following commands to activate the environment.
 ```
-module load anaconda
-conda activate /storage/icds/RISE/training/microbiome/2024/envs/microbiome
+module load anaconda/2023.09
+conda activate /storage/group/one/default/workshop/2025/envs/microbiome
 ```
 
 ## Full installation
