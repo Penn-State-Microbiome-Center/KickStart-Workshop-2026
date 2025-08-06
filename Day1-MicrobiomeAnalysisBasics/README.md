@@ -13,7 +13,7 @@
 
 ## Schedule
 1. Welcome and Introductions
-2. Sampling (Francisco Dini Andreote) 
+2. Sampling (Francisco Dini Andreote) - [pdf](Sampling_Day_FDA_OHMC_Kickstart_Workshop.pdf)
 3. Controls/Contamination (Emily Davenport - slides by Laura Weyrich) - [pdf](2022_KickStartWorkshop_Contamination.pdf)
 4. DNA Extraction/Library Prep (Molly Bletz) - [pdf](MicrobiomeKickStarter_DNA_Extraction_Bletz2025.pdf)
 6. Sequencing Technology (Darrell Cockburn) - [pdf](Sequencing_Technology_Cockburn_2024.pdf)
