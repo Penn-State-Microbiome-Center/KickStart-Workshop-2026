@@ -73,7 +73,9 @@ One of the beneficial tasks of sourmash is to estimate similarity between sketch
 
 To start our sourmash tutorial, we will sketch our fasta file of interest: **sample_001.fna**. This file does not contain any meaningfull information but is just a play dataset for tutorial purposes. 
 
-`sourmash sketch dna data/sample_001.fna -p k=31,scaled=500 --output-dir output`
+```
+sourmash sketch dna data/sample_001.fna -p k=31,scaled=500 --output-dir output
+```
 
 |Parameter      |Description|
 |---------------|----------|
@@ -86,9 +88,11 @@ To start our sourmash tutorial, we will sketch our fasta file of interest: **sam
 
 Utilizing sourmash sketch, we have produced the following  file, known as a signature file: **sample_001.fna.sig**. 
 
-Let's be a bit anosey and see what this file contains:
+Let's be a bit nosey and see what this file contains:
 
-`sourmash sig describe output/sample_001.fna.sig`
+```
+sourmash sig describe output/sample_001.fna.sig
+```
 
 Below is the information you should see displayed on your end. Information such as the signature filename, sequence type, ksize and scale factor used are report. Additional information, such as total number of signatures and hashes are also shown, alongside other information.
 
@@ -114,11 +118,15 @@ summary of sketches:
 
 Now that we feel a bit more comfortable with a sketching fasta file. Let's sketch a another file to compare it to the previous signature file we produced. Notice, that we are using the same ksize and scale factor, sourmash requires that two signatures have parameters tuned in the same way for comparison. 
 
-`sourmash sketch dna data/sample_002.fna -p k=31,scaled=500 --output-dir output/`
+```
+sourmash sketch dna data/sample_002.fna -p k=31,scaled=500 --output-dir output/
+```
 
 Let's estimate the containment index of our signature files utilizing `sourmash compare`!
 
-`sourmash compare output/sample_001.fna.sig output/sample_002.fna.sig --containment`
+```
+sourmash compare output/sample_001.fna.sig output/sample_002.fna.sig --containment
+```
 
 You should see the following output, where we have the names of the original fasta files and the containment between these files.
 
@@ -137,7 +145,9 @@ WARNING: size estimation for at least one of these sketches may be inaccurate. A
 
 These results can be reported to a csv file for further analyses.
 
-` sourmash compare output/sample_001.fna.sig output/sample_002.fna.sig --containment --csv output/compare.csv`
+```
+sourmash compare output/sample_001.fna.sig output/sample_002.fna.sig --containment --csv output/compare.csv
+```
 
 |Parameter      |Description|
 |---------------|----------|
@@ -161,11 +171,16 @@ As you may have noticed, the comparisons reported are between two fasta files as
 
 Let's modify our `sourmaash sketch` command by adding the `--singleton` flag, this will produce a signature file where each sequence is sketched individually.
 
-`sourmash sketch dna data/sample_001.fna --singleton -p k=31,scaled=500 -o output/sample_001.fna.singleton.sig`
+```
+sourmash sketch dna data/sample_001.fna --singleton -p k=31,scaled=500 -o output/sample_001.fna.singleton.sig
+sourmash sketch dna data/sample_002.fna --singleton -p k=31,scaled=500 -o output/sample_002.fna.singleton.sig
+```
 
 Compare the description between the first signature file we produced in which the `--singleton` flag was not utilized (**sample_001.fna.sig**) ato our new siganture file that does utilize the `--singleton` flag, **sample_001.fna.singleton.sig**.
 
-`sourmash sig fileinfo output/sample_001.fna.singleton.sig`
+```
+sourmash sig fileinfo output/sample_001.fna.singleton.sig
+```
 
 Instead of having just one sketch representing the fasta file as a whole, the `--singleton` flag produces a signature file with 10 sketches representing the 10 sequences within our fasta file of interest. 
 
@@ -188,13 +203,17 @@ summary of sketches:
 
 We can run the same command for coomparing two signature files, and the csv file produced will contain the matrix for individual sequences.
 
-`sourmash compare output/sample_001.fna.singleton.sig output/sample_002.fna.singleton.sig --containment --csv output/compare.singleton.sig.csv`
+```
+sourmash compare output/sample_001.fna.singleton.sig output/sample_002.fna.singleton.sig --containment --csv output/compare.singleton.sig.csv
+```
 
 ## Search and report overall similarity percentages using sourmash search
 
 Maybe you would like to report the percent of how much there is of one sample in another sample.
 
-`sourmash search output/sample_001.fna.sig output/sample_002.fna.sig --containment`
+```
+sourmash search output/sample_001.fna.sig output/sample_002.fna.sig --containment
+```
 
 |Parameter      |Description|
 |---------------|----------|
@@ -296,7 +315,7 @@ curl -O -L https://github.com/sourmash-bio/sourmash/raw/latest/data/eschericia-s
 tar xzf eschericia-sigs.tar.gz
 rm eschericia-sigs.tar.gz
 
-cd ../
+cd ../..
 
 ```
 
@@ -309,15 +328,13 @@ ls data/ecoli_many_sigs
 Let's turn this into an easily-searchable database with `sourmash index` --
 
 ```
-sourmash index output/ecolidb ecoli_many_sigs/*.sig
+sourmash index output/ecolidb data/ecoli_many_sigs/*.sig
 ```
 
 and now we can search!
 
-**TODO: looks like ecoli-metagenome.sig does not exist**
-
 ```
-sourmash search output/ecoli-metagenome.sig output/ecolidb.sbt.zip -n 20
+sourmash search output/ecoli-genome.sig output/ecolidb.sbt.zip
 ```
 
 You should see output like this:
@@ -364,13 +381,13 @@ sourmash compare data/ecoli_many_sigs/* -o output/ecoli_cmp
 Optionally, parallelize to 8 threads using `-p 8`:
 
 ```
-sourmash compare -p 8 data/ecoli_many_sigs/* -o data/ecoli_cmp
+sourmash compare -p 8 data/ecoli_many_sigs/* -o output/ecoli_cmp
 ```
 
 and then plot:
 
 ```
-sourmash plot --pdf --labels data/ecoli_cmp
+sourmash plot --pdf --labels output/ecoli_cmp
 ```
 
 which will produce files named `ecoli_cmp.matrix.pdf` and
