@@ -6,8 +6,45 @@ Studying Symbiosis through Sequencing (Liana Burghardt) - [pdf](MicrobiomeKickSt
 ## Amplicon Analysis in R: 
 ### Resources
 
-- [2025 presentations PDF files + code examples](https://pennstateoffice365-my.sharepoint.com/:f:/g/personal/evk5387_psu_edu/EvUN_epjzhtOs8fixwmt7vwB1vqGgXjR2VIcBbQCfU90Qw?e=IDYzIQ) (need PSU authentication to access) 
+[2025 presentations PDF files + code examples](https://pennstateoffice365-my.sharepoint.com/:f:/g/personal/evk5387_psu_edu/EvUN_epjzhtOs8fixwmt7vwB1vqGgXjR2VIcBbQCfU90Qw?e=IDYzIQ) (need PSU authentication to access) 
 
+- log onto the portal
+http://rcportal.hpc.psu.edu/ 
+
+- start an R session
+  
+Environment Selection: Use custom text field
+
+Environment setup:
+      module use /storage/icds/RISE/training/microbiome/2024/modulefiles
+      module load gcc R
+
+Account: open
+Partition: interactive
+Number of cores: 4
+Memory per core (in GB): 16
+Number of hours: 2
+
+Launch
+
+- In Rstudio
+
+🖥️ in terminal
+
+navigate to work directory
+
+copy data
+
+cp -r /storage/group/one/default/workshop/2025/16s .
+
+check that data was copied
+
+🖥️ in console
+
+check working directory
+
+set working directory to the folder with the data
+   
 #### **Suggested Reading**
 
 Weinroth MD, Belk AD, Dean C, et al. Considerations and best practices in animal science 16S ribosomal RNA gene sequencing microbiome studies. J Anim Sci. 2022;100(2):skab346. doi:10.1093/jas/skab346 [Link](https://academic.oup.com/jas/article/100/2/skab346/6519592)
