@@ -15,15 +15,17 @@ http://portal.hpc.psu.edu/
   
 Environment Selection: Use custom text field
 
-Environment setup:
+Environment setup:  
+```
       module use /storage/icds/RISE/training/microbiome/2024/modulefiles
       module load gcc R
+```
 
-Account: open
-Partition: interactive
-Number of cores: 4
-Memory per core (in GB): 16
-Number of hours: 2
+Account: open  
+Partition: interactive  
+Number of cores: 4  
+Memory per core (in GB): 16  
+Number of hours: 2  
 
 Launch
 
@@ -35,7 +37,7 @@ navigate to work directory
 
 copy data
 
-cp -r /storage/group/one/default/workshop/2025/16s .
+`cp -r /storage/group/one/default/workshop/2025/16s .`
 
 check that data was copied
 
