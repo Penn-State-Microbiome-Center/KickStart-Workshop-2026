@@ -1,7 +1,7 @@
 # Day 2: Symbiosis and Amplicon analysis in R
 
 ## Morning Lecture:
-Studying Symbiosis through Sequencing (Liana Burghardt) - [pdf](MicrobiomeKickStart_Burghardt_Aug2024.pdf)
+Studying Symbiosis through Sequencing (Liana Burghardt) - [pdf](MicrobiomeKickStart_Burghardt_Aug2025.pdf)
 
 ## Amplicon Analysis in R: 
 ### Resources
