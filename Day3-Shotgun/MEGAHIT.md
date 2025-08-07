@@ -33,16 +33,8 @@ cd ..
 
 MEGAHIT is already installed in the OnDemand environment, and you can activate it via:
 ```
-module use /gpfs/group/RISE/sw7/modules
-module load anaconda
-conda deactivate
-conda activate microbiome1
-```
-
-Otherwise, if you are on a different system, MEGAHIT can be installed with conda in the following fashion:
-```
-conda create -y -n megahit -c bioconda megahit
-conda activate megahit
+module load anaconda/2023.09
+conda activate /storage/group/one/default/workshop/2025/envs/megahit/
 ```
 
 ## Usage
@@ -153,17 +145,7 @@ a reference though, you can still use it to gain some insight into your assembly
 
 QUAST comes pre-installed in the OnDemand system and can be activated via:
 ```bash
-conda deactivate
-module use /gpfs/group/RISE/sw7/modules
-module load anaconda
-conda activate microbiome2
-```
-
-If you are on a different system, to install QUAST, we simply need to run:
-```
-conda deactivate
-conda create --prefix ~/quast -y -c bioconda quast bwa bedtools
-conda activate ~/quast
+conda activate /storage/group/one/default/workshop/2025/envs/assembly/
 ```
 
 ### Running QUAST
