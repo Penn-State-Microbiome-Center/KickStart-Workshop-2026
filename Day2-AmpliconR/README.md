@@ -9,7 +9,7 @@ Studying Symbiosis through Sequencing (Liana Burghardt) - [pdf](MicrobiomeKickSt
 [2025 presentations PDF files + code examples](https://pennstateoffice365-my.sharepoint.com/:f:/g/personal/evk5387_psu_edu/EvUN_epjzhtOs8fixwmt7vwB1vqGgXjR2VIcBbQCfU90Qw?e=IDYzIQ) (need PSU authentication to access) 
 
 - log onto the portal
-http://rcportal.hpc.psu.edu/ 
+http://portal.hpc.psu.edu/ 
 
 - start an R session
   
