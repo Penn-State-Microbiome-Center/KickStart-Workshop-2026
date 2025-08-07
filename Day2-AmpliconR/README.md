@@ -17,7 +17,7 @@ Environment Selection: Use custom text field
 
 Environment setup:  
 ```
-      module use /storage/icds/RISE/training/microbiome/2024/modulefiles
+      module use /storage/group/one/default/workshop/2025/modulefiles
       module load gcc R
 ```
 
