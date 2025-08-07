@@ -24,7 +24,7 @@ module load gcc R
 Account: open  
 Partition: interactive  
 Number of cores: 4  
-Memory per core (in GB): 16  
+Memory per core (in GB): 32  
 Number of hours: 2  
 
 Launch
@@ -58,6 +58,8 @@ Mirzayi C, Renson A; Genomic Standards Consortium; Reporting guidelines for huma
 Callahan BJ, McMurdie PJ, Rosen MJ, Han AW, Johnson AJ, Holmes SP. DADA2: High-resolution sample inference from Illumina amplicon data. Nat Methods. 2016;13(7):581-583. doi:10.1038/nmeth.3869 [Link](https://www.nature.com/articles/nmeth.3869)
 
 Gloor GB, Macklaim JM, Pawlowsky-Glahn V, Egozcue JJ. Microbiome Datasets Are Compositional: And This Is Not Optional. Front Microbiol. 2017;8:2224. Published 2017 Nov 15. doi:10.3389/fmicb.2017.02224 [Link](https://www.frontiersin.org/journals/microbiology/articles/10.3389/fmicb.2017.02224/full)
+
+Callahan BJ, Sankaran K, Fukuyama JA et al. Bioconductor Workflow for Microbiome Data Analysis: from raw reads to community analyses. F1000Research 2016, 5:1492 [Link](https://doi.org/10.12688/f1000research.8986.2)
 
 #### **Best practices for differential abundance analysis**
 
