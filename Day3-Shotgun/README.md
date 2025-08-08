@@ -6,10 +6,14 @@
 
 #### Graphical user interface
 1. Nagivate to [portal.hpc.psu.edu](https://portal.hpc.psu.edu/)
-2. In the "Interactive Apps", choose "Roar Collab RHEL8 Interactive Desktop"
+2. In the "Interactive Apps", choose "Interactive Desktop"
+3. For account, select "open"
+4. For partition, select "open"
 5. Under "Number of hours", select 10
-6. Change the number of nodes to 1, the number of cores to 4, and the memory to 64
-7. Click "Launch"
+6. Under that box, there's a little tix box that says "Enable advanced Slurm options." Tix that box
+7. In the text box that pops up, leave the line that says "--partition=sla-prio". Add another line that says "--mem=64G"
+8. *IGNORE THIS LINE FOR NOW!* Change the number of nodes to 1, the number of cores to 4, and the memory to 64
+9. Click "Launch"
 
 After that, open a terminal (little black icon on the top bar, next to the firefox icon), and then enter the following commands:
 ```
