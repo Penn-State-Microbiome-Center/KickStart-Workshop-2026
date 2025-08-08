@@ -5,7 +5,7 @@
 ### Reminder if you forget how to access the ACI ROAR Collab cluster
 
 #### Graphical user interface
-1. Nagivate to [rcportal.hpc.psu.edu](https://rcportal.hpc.psu.edu/)
+1. Nagivate to [portal.hpc.psu.edu](https://portal.hpc.psu.edu/)
 2. In the "Interactive Apps", choose "Roar Collab RHEL8 Interactive Desktop"
 5. Under "Number of hours", select 10
 6. Change the number of nodes to 1, the number of cores to 4, and the memory to 64
