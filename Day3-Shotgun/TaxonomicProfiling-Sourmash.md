@@ -198,6 +198,45 @@ similarity   match
  76.2%       sample_002.fna
  ```
 
+# Comparing a larger set of genomes
+## Download some genomes
+```
+cd data
+mkdir ecoli
+cd ecoli
+wget https://raw.githubusercontent.com/Penn-State-Microbiome-Center/KickStart-Workshop-2026/refs/heads/main/Day3-Shotgun/Data/ecoli_urls.txt
+wget -i ecoli_urls.txt
+cd ../..
+```
+## Sketch the genomes
+```
+sourmash sketch dna -p k=21,scaled=100 data/ecoli/*.gz --output-dir data/ecoli
+```
+
+## Compare them
+```
+sourmash compare data/ecoli/*.sig -o output/ecoli_compare
+```
+
+## Plot
+```
+sourmash plot --pdf --labels output/ecoli_compare --output-dir output
+```
+
+## Add an extra genome
+```
+wget -P data/ecoli https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/001/900/315/GCF_001900315.1_ASM190031v1/GCF_001900315.1_ASM190031v1_genomic.fna.gz
+```
+
+## Redo sketching and plotting
+```
+sourmash sketch dna -p k=21,scaled=100 data/ecoli/GCF_001900315.1_ASM190031v1_genomic.fna.gz --output-dir data/ecoli
+sourmash compare data/ecoli/*.sig -o output/ecoli_compare2
+sourmash plot --pdf --labels output/ecoli_compare2 --output-dir output
+```
+
+
+
 
 # Other example uses
 (courtesy of the DIB lab: https://sourmash.readthedocs.io/en/latest/tutorial-basic.html)
