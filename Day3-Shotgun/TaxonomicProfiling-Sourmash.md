@@ -165,48 +165,6 @@ sample_001.fna,sample_002.fna
 0.7619047624764425,1.0
 ```
 
-## Compare individual sequences between signatures.
-
-As you may have noticed, the comparisons reported are between two fasta files as a whole. However, you might be interested in comparing the sequences individually than the sequences as a whole. To accomplish this, we revisit `sourmash sketch`. 
-
-Let's modify our `sourmaash sketch` command by adding the `--singleton` flag, this will produce a signature file where each sequence is sketched individually.
-
-```
-sourmash sketch dna data/sample_001.fna --singleton -p k=31,scaled=500 -o output/sample_001.fna.singleton.sig
-sourmash sketch dna data/sample_002.fna --singleton -p k=31,scaled=500 -o output/sample_002.fna.singleton.sig
-```
-
-Compare the description between the first signature file we produced in which the `--singleton` flag was not utilized (**sample_001.fna.sig**) ato our new siganture file that does utilize the `--singleton` flag, **sample_001.fna.singleton.sig**.
-
-```
-sourmash sig fileinfo output/sample_001.fna.singleton.sig
-```
-
-Instead of having just one sketch representing the fasta file as a whole, the `--singleton` flag produces a signature file with 10 sketches representing the 10 sequences within our fasta file of interest. 
-
-```
-
-== This is sourmash version 4.8.6. ==
-== Please cite Brown and Irber (2016), doi:10.21105/joss.00027. ==
-
-** loading from 'test.sig'
-path filetype: MultiIndex
-location: sample_001.fna.singleton.sig
-is database? no
-has manifest? yes
-num signatures: 10
-** examining manifest...
-total hashes: 210
-summary of sketches:
-   10 sketches with DNA, k=31, scaled=500             210 total hashes
-```
-
-We can run the same command for coomparing two signature files, and the csv file produced will contain the matrix for individual sequences.
-
-```
-sourmash compare output/sample_001.fna.singleton.sig output/sample_002.fna.singleton.sig --containment --csv output/compare.singleton.sig.csv
-```
-
 ## Search and report overall similarity percentages using sourmash search
 
 Maybe you would like to report the percent of how much there is of one sample in another sample.
