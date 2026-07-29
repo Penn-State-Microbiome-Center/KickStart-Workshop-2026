@@ -260,6 +260,232 @@ You should see a plot that looks like:
 ![Yacht reference genomes comparison plot](Data/refs_cmp.matrix.png)
 
 
+---
+
+# A detour: automating this with Snakemake
+
+Everything so far has been commands typed by hand, in order, once. That is fine for a tutorial. It stops being fine the moment a collaborator hands you a sixteenth genome, because now you have to remember which commands to re-run, in what order, and which outputs are quietly stale. This is the single most common source of irreproducible results in bioinformatics: not a bad algorithm, but a plot built from an out-of-date intermediate file.
+
+**Snakemake** is a workflow manager that solves this. You describe your analysis as a set of **rules**, each declaring its `input` files, its `output` files, and the `shell` command that turns one into the other. You never specify an order. Snakemake reads the rules, notices that one rule's output is another's input, and builds the dependency graph itself. Then, given a target you want, it works *backwards* and runs only the steps whose outputs are missing or older than their inputs.
+
+Three consequences make it worth the ten minutes it takes to learn:
+
+| | |
+| --- | --- |
+| **Nothing is re-computed needlessly** | Change one input and only the affected part of the graph re-runs. |
+| **Parallelism is free** | Independent jobs are dispatched across cores automatically with `--cores N`. |
+| **The workflow is the documentation** | The Snakefile *is* the record of what was run. It replaces the paragraph in your methods section that starts "we then ran sourmash with default parameters." |
+
+Snakemake is written in Python, and a Snakefile is a Python file with some extra syntax, so anything you can compute in Python you can use to build your workflow.
+
+> **Check that it is installed** before continuing:
+>
+> ```bash
+> snakemake --version
+> ```
+>
+> If that errors, `conda install -c conda-forge -c bioconda snakemake-minimal` into your environment.
+
+## The Snakefile
+
+We will rebuild the sketch → compare → plot pipeline from the last section as a workflow. One change from what we did by hand: instead of sketching all 15 genomes in a single `sourmash sketch` call, we sketch each genome into its own signature file and then stitch them together with `sourmash sig cat`. The result is identical — `sourmash sketch dna a.fna.gz b.fna.gz -o out.zip` already produces one signature per input file — but splitting it up is what lets Snakemake see the genomes individually, and therefore skip the fifteen it has already done.
+
+Save this as `Snakefile` in your `sourmash_analysis/` directory:
+
+```python
+# Snakefile -- sketch every reference genome, merge, compare, plot.
+
+REF_DIR    = "demo/ref_genomes"
+SKETCH_DIR = "sketches"
+KSIZE      = 31
+SCALED     = 1000
+
+# Look in REF_DIR and pull out the name of every genome sitting there.
+GENOMES, = glob_wildcards(REF_DIR + "/{genome}.fna.gz")
+GENOMES  = sorted(GENOMES)
+
+
+# The final products we want. Snakemake works backwards from here.
+rule all:
+    input:
+        expand(SKETCH_DIR + "/refs_cmp.{plot}.png",
+               plot=["matrix", "dendro", "hist"])
+
+
+# One sketch per genome. The {genome} wildcard makes this a template.
+rule sketch_genome:
+    input:
+        REF_DIR + "/{genome}.fna.gz"
+    output:
+        SKETCH_DIR + "/individual/{genome}.sig.zip"
+    params:
+        k=KSIZE, scaled=SCALED
+    shell:
+        "sourmash sketch dna {input} "
+        "-p k={params.k},scaled={params.scaled} "
+        "--name-from-first -o {output}"
+
+
+# Collect the individual sketches into the single refs.sig.zip we used above.
+rule merge_sketches:
+    input:
+        expand(SKETCH_DIR + "/individual/{genome}.sig.zip", genome=GENOMES)
+    output:
+        SKETCH_DIR + "/refs.sig.zip"
+    shell:
+        "sourmash sig cat {input} -o {output}"
+
+
+rule compare:
+    input:
+        SKETCH_DIR + "/refs.sig.zip"
+    output:
+        matrix=SKETCH_DIR + "/refs_cmp",
+        labels=SKETCH_DIR + "/refs_cmp.labels.txt"
+    params:
+        k=KSIZE
+    shell:
+        "sourmash compare {input} --estimate-ani -k {params.k} -o {output.matrix}"
+
+
+rule plot:
+    input:
+        matrix=SKETCH_DIR + "/refs_cmp",
+        labels=SKETCH_DIR + "/refs_cmp.labels.txt"
+    output:
+        multiext(SKETCH_DIR + "/refs_cmp",
+                 ".matrix.png", ".dendro.png", ".hist.png")
+    params:
+        outdir=SKETCH_DIR
+    shell:
+        "sourmash plot --labels {input.matrix} --output-dir {params.outdir}"
+```
+
+Four ideas are doing all the work here:
+
+| Concept | What it does |
+| --- | --- |
+| `glob_wildcards` | Scans the filesystem *right now* and extracts the part of each filename matching `{genome}`. This is what makes the workflow notice new files. |
+| Wildcards (`{genome}`) | `sketch_genome` is a template, not one job. Snakemake instantiates it once per genome and fills in `{input}` and `{output}` accordingly. |
+| `expand` | Expands a template over a list, turning one pattern into the 15 filenames `merge_sketches` depends on. |
+| `rule all` | By convention the first rule, listing the final targets. Snakemake builds whatever `rule all` asks for and nothing else. |
+
+Note that `compare` declares `refs_cmp.labels.txt` as an output even though we never name it on the command line. `sourmash compare` writes it as a side effect, and `sourmash plot` needs it. Declaring every file a rule actually produces is good hygiene: it tells Snakemake to check for the file, and to clean it up if the job fails halfway.
+
+## Run it
+
+Dry-run first. `-n` prints the plan without executing anything, which is the habit worth forming:
+
+```bash
+snakemake -n --cores 4
+```
+
+Then run it:
+
+```bash
+snakemake --cores 4
+```
+
+```
+Building DAG of jobs...
+Job stats:
+job               count
+--------------  -------
+sketch_genome        15
+merge_sketches        1
+compare               1
+plot                  1
+all                   1
+total                19
+```
+
+Nineteen jobs, and the fifteen `sketch_genome` jobs are independent so they run four at a time. You end up with exactly the `sketches/refs_cmp.matrix.png` you produced by hand in the previous section, plus a `sketches/individual/` directory holding the per-genome signatures.
+
+Now run the exact same command again:
+
+```bash
+snakemake --cores 4
+```
+
+```
+Building DAG of jobs...
+Nothing to be done (all requested files are present and up to date).
+```
+
+Everything is current, so nothing runs. This is the property we are about to exploit.
+
+## Add a genome and re-run
+
+Grab a sixteenth genome — a complete *Cloacibacterium normanense* chromosome — and drop it into the reference directory:
+
+```bash
+wget -O demo/ref_genomes/NZ_CP034157.1_Cloacibacterium.fna.gz \
+  https://raw.githubusercontent.com/Penn-State-Microbiome-Center/KickStart-Workshop-2026/main/Day3-Shotgun/Data/NZ_CP034157.1_Cloacibacterium.fna.gz
+```
+
+
+We changed nothing about the Snakefile. Ask Snakemake what it now intends to do:
+
+```bash
+snakemake -n --cores 4
+```
+
+```
+Job stats:
+job               count
+--------------  -------
+sketch_genome         1
+merge_sketches        1
+compare               1
+plot                  1
+all                   1
+total                 5
+
+rule sketch_genome:
+    input: demo/ref_genomes/NZ_CP034157.1_Cloacibacterium.fna.gz
+    output: sketches/individual/NZ_CP034157.1_Cloacibacterium.sig.zip
+    reason: Missing output files: ...; Updated input files: ...
+    wildcards: genome=NZ_CP034157.1_Cloacibacterium
+```
+
+Five jobs instead of nineteen. One sketch, not sixteen. The fifteen existing signatures are already on disk and up to date, so Snakemake leaves them alone; the merge, comparison, and plot all sit downstream of a changed file, so those do re-run. Note the `reason:` line — Snakemake explains every job it schedules, which makes debugging a workflow far less mysterious than debugging a shell script.
+
+Run it:
+
+```bash
+snakemake --cores 4
+```
+
+```
+5 of 5 steps (100%) done
+```
+
+The first run took roughly 20 seconds; this one takes about 4. On a real reference set of ten thousand genomes, that ratio is the difference between an afternoon and a coffee break.
+
+## What changed in the plot
+
+Open `sketches/refs_cmp.matrix.png` again. The two-genome *Cloacibacterium caeni* block from the previous section is now a three-genome block:
+
+<!-- TODO: add the 16-genome heatmap to Data/ and point this at it -->
+![Reference genome comparison with the added Cloacibacterium genome](Data/refs_cmp_16.matrix.png)
+
+The new *C. normanense* genome lands at about **96.3%** and **96.1%** estimated ANI against the two *C. caeni* isolates, right alongside the 96.1% those two isolates share with each other. And the signal is real rather than an artifact of the `containment^(1/k)` inflation we warned about above: the raw Jaccard for all three *Cloacibacterium* pairs is between 0.17 and 0.19, while every other pair in the matrix is below 0.001. The count of exactly-zero off-diagonal cells goes from 92 of 105 to 105 of 120 — the only two new nonzero cells in the entire matrix are the two *normanense*–*caeni* pairs.
+
+That is the whole point of the exercise. You added a file. You re-ran one command. The sketching, the merge, the all-pairs comparison, and the figure all updated themselves, and nothing that did not need to be recomputed was recomputed.
+
+## Three flags worth remembering
+
+| Flag | Why |
+| --- | --- |
+| `-n` (`--dry-run`) | Always. Shows the plan and the reason for every job before anything executes. |
+| `--cores N` | Required. Sets how many jobs run concurrently. |
+| `-p` | Prints the actual shell command for each job, which is how you catch a mis-quoted parameter. |
+
+Snakemake goes considerably further than this — per-rule conda environments, cluster and cloud submission (it can hand each job to Slurm on Roar for you), config files, logging, and containerization. The [Snakemake documentation](https://snakemake.readthedocs.io/) and its [official tutorial](https://snakemake.readthedocs.io/en/stable/tutorial/tutorial.html) are the place to go next.
+
+---
+
+
 
 ---
 
