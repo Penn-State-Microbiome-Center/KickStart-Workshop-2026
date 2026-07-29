@@ -290,15 +290,17 @@ Snakemake is written in Python, and a Snakefile is a Python file with some extra
 
 We will rebuild the sketch → compare → plot pipeline from the last section as a workflow. One change from what we did by hand: instead of sketching all 15 genomes in a single `sourmash sketch` call, we sketch each genome into its own signature file and then stitch them together with `sourmash sig cat`. The result is identical — `sourmash sketch dna a.fna.gz b.fna.gz -o out.zip` already produces one signature per input file — but splitting it up is what lets Snakemake see the genomes individually, and therefore skip the fifteen it has already done.
 
+The workflow builds everything into its own fresh directory, `snakemake_output/`, rather than reusing the `sketches/` files you made by hand. A workflow that regenerates every one of its outputs from scratch is easier to reason about — and it means Snakemake genuinely has all 19 steps to run the first time, so you can watch the dependency graph come to life.
+
 Save this as `Snakefile` in your `sourmash_analysis/` directory:
 
 ```python
 # Snakefile -- sketch every reference genome, merge, compare, plot.
 
-REF_DIR    = "demo/ref_genomes"
-SKETCH_DIR = "sketches"
-KSIZE      = 31
-SCALED     = 1000
+REF_DIR = "demo/ref_genomes"
+OUT_DIR = "snakemake_output"
+KSIZE   = 31
+SCALED  = 1000
 
 # Look in REF_DIR and pull out the name of every genome sitting there.
 GENOMES, = glob_wildcards(REF_DIR + "/{genome}.fna.gz")
@@ -308,7 +310,7 @@ GENOMES  = sorted(GENOMES)
 # The final products we want. Snakemake works backwards from here.
 rule all:
     input:
-        expand(SKETCH_DIR + "/refs_cmp.{plot}.png",
+        expand(OUT_DIR + "/refs_cmp.{plot}.png",
                plot=["matrix", "dendro", "hist"])
 
 
@@ -317,7 +319,7 @@ rule sketch_genome:
     input:
         REF_DIR + "/{genome}.fna.gz"
     output:
-        SKETCH_DIR + "/individual/{genome}.sig.zip"
+        OUT_DIR + "/individual/{genome}.sig.zip"
     params:
         k=KSIZE, scaled=SCALED
     shell:
@@ -326,22 +328,22 @@ rule sketch_genome:
         "--name-from-first -o {output}"
 
 
-# Collect the individual sketches into the single refs.sig.zip we used above.
+# Collect the individual sketches into a single refs.sig.zip.
 rule merge_sketches:
     input:
-        expand(SKETCH_DIR + "/individual/{genome}.sig.zip", genome=GENOMES)
+        expand(OUT_DIR + "/individual/{genome}.sig.zip", genome=GENOMES)
     output:
-        SKETCH_DIR + "/refs.sig.zip"
+        OUT_DIR + "/refs.sig.zip"
     shell:
         "sourmash sig cat {input} -o {output}"
 
 
 rule compare:
     input:
-        SKETCH_DIR + "/refs.sig.zip"
+        OUT_DIR + "/refs.sig.zip"
     output:
-        matrix=SKETCH_DIR + "/refs_cmp",
-        labels=SKETCH_DIR + "/refs_cmp.labels.txt"
+        matrix=OUT_DIR + "/refs_cmp",
+        labels=OUT_DIR + "/refs_cmp.labels.txt"
     params:
         k=KSIZE
     shell:
@@ -350,13 +352,13 @@ rule compare:
 
 rule plot:
     input:
-        matrix=SKETCH_DIR + "/refs_cmp",
-        labels=SKETCH_DIR + "/refs_cmp.labels.txt"
+        matrix=OUT_DIR + "/refs_cmp",
+        labels=OUT_DIR + "/refs_cmp.labels.txt"
     output:
-        multiext(SKETCH_DIR + "/refs_cmp",
+        multiext(OUT_DIR + "/refs_cmp",
                  ".matrix.png", ".dendro.png", ".hist.png")
     params:
-        outdir=SKETCH_DIR
+        outdir=OUT_DIR
     shell:
         "sourmash plot --labels {input.matrix} --output-dir {params.outdir}"
 ```
@@ -399,7 +401,7 @@ all                   1
 total                19
 ```
 
-Nineteen jobs, and the fifteen `sketch_genome` jobs are independent so they run four at a time. You end up with exactly the `sketches/refs_cmp.matrix.png` you produced by hand in the previous section, plus a `sketches/individual/` directory holding the per-genome signatures.
+Nineteen jobs, and the fifteen `sketch_genome` jobs are independent so they run four at a time. You end up with the same `refs_cmp.matrix.png` you produced by hand in the previous section — now in `snakemake_output/`, rebuilt automatically — plus a `snakemake_output/individual/` directory holding the per-genome signatures.
 
 Now run the exact same command again:
 
@@ -419,7 +421,7 @@ Everything is current, so nothing runs. This is the property we are about to exp
 Grab a sixteenth genome — a complete *Cloacibacterium normanense* chromosome — and drop it into the reference directory:
 
 ```bash
-wget -O demo/ref_genomes/NZ_CP034157.1_Cloacibacterium.fna.gz \
+wget -P demo/ref_genomes/ \
   https://raw.githubusercontent.com/Penn-State-Microbiome-Center/KickStart-Workshop-2026/main/Day3-Shotgun/Data/NZ_CP034157.1_Cloacibacterium.fna.gz
 ```
 
@@ -443,7 +445,7 @@ total                 5
 
 rule sketch_genome:
     input: demo/ref_genomes/NZ_CP034157.1_Cloacibacterium.fna.gz
-    output: sketches/individual/NZ_CP034157.1_Cloacibacterium.sig.zip
+    output: snakemake_output/individual/NZ_CP034157.1_Cloacibacterium.sig.zip
     reason: Missing output files: ...; Updated input files: ...
     wildcards: genome=NZ_CP034157.1_Cloacibacterium
 ```
@@ -464,9 +466,8 @@ The first run took roughly 20 seconds; this one takes about 4. On a real referen
 
 ## What changed in the plot
 
-Open `sketches/refs_cmp.matrix.png` again. The two-genome *Cloacibacterium caeni* block from the previous section is now a three-genome block:
+Open `snakemake_output/refs_cmp.matrix.png`. The two-genome *Cloacibacterium caeni* block from the previous section is now a three-genome block:
 
-<!-- TODO: add the 16-genome heatmap to Data/ and point this at it -->
 ![Reference genome comparison with the added Cloacibacterium genome](Data/refs_cmp_16.matrix.png)
 
 The new *C. normanense* genome lands at about **96.3%** and **96.1%** estimated ANI against the two *C. caeni* isolates, right alongside the 96.1% those two isolates share with each other. And the signal is real rather than an artifact of the `containment^(1/k)` inflation we warned about above: the raw Jaccard for all three *Cloacibacterium* pairs is between 0.17 and 0.19, while every other pair in the matrix is below 0.001. The count of exactly-zero off-diagonal cells goes from 92 of 105 to 105 of 120 — the only two new nonzero cells in the entire matrix are the two *normanense*–*caeni* pairs.
