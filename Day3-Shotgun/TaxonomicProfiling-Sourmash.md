@@ -243,72 +243,23 @@ This is a good place to stop and notice what we do *not* yet have. Our sample wa
 
 ```bash
 sourmash compare sketches/refs.sig.zip --estimate-ani -k 31 -o sketches/refs_cmp
-sourmash plot --pdf --labels sketches/refs_cmp --output-dir sketches
+sourmash plot --labels sketches/refs_cmp --output-dir sketches
 ```
 
-`sourmash plot` writes three PDFs — `refs_cmp.dendro.pdf`, `refs_cmp.matrix.pdf`, and `refs_cmp.hist.pdf`. Without `--output-dir` they land in whatever directory you ran the command from, which is a common source of "where did my plot go?"
+`sourmash plot` writes three PDFs — `refs_cmp.dendro.png`, `refs_cmp.matrix.png`, and `refs_cmp.hist.png`. Without `--output-dir` they land in whatever directory you ran the command from, which is a common source of "where did my plot go?"
 
 For our 15 references, 92 of the 105 off-diagonal entries are exactly zero — these are distinct GTDB species with no meaningful k-mer overlap — and there is a single genuinely hot pair at about 96% ANI: the two *Cloacibacterium caeni* isolates from the vignette above.
 
 You will also see a scattering of mid-range cells around 60-80%. Do not over-read these. They come from pairs sharing only a handful of hashes, and because ANI is estimated as roughly `containment^(1/k)`, taking the 31st root of a very small number pushes it deceptively close to 1. It is the same lesson as the vignette, seen from the other side: ANI is the right scale for comparing genomes that genuinely overlap, but it is not a reliable signal when the intersection is nearly empty. If you want to see the raw picture, rerun without `--estimate-ani` and note that only one off-diagonal pair exceeds a Jaccard of 0.01.
 
-## To view the PDFs
+## To view the images
 
-On Open OnDemand, the easiest route is the **Files** browser: navigate to `~/sourmash_analysis/sketches/` and click a PDF to open it in a new browser tab.
+On Open OnDemand, the easiest route is the **Files** browser: navigate to `~/sourmash_analysis/sketches/` and click an image to view it.
 
----
+You should see a plot that looks like:
+![Yacht reference genomes comparison plot](Data/refs_cmp.matrix.png)
 
-# Compare many signatures and build a tree
 
-The 15-genome matrix above is small enough to read but too sparse to make an interesting tree. To see what a real dendrogram looks like, we will use a larger, denser collection: 50 *E. coli* genomes, which are all the same species and therefore all related to each other.
-
-## Get the signatures
-
-These signatures are pre-computed and distributed with sourmash itself, so there is nothing to sketch:
-
-```bash
-cd ~/sourmash_analysis
-mkdir -p ecoli_many_sigs
-cd ecoli_many_sigs
-curl -O -L https://github.com/sourmash-bio/sourmash/raw/latest/data/eschericia-sigs.tar.gz
-tar xzf eschericia-sigs.tar.gz
-rm eschericia-sigs.tar.gz
-cd ..
-```
-
-This produces 50 files named `ecoli-N.sig`:
-
-```bash
-ls ecoli_many_sigs/*.sig | wc -l    #<<-- should print 50
-```
-
-## Compare all the things
-
-```bash
-sourmash compare ecoli_many_sigs/*.sig -o sketches/ecoli_cmp
-```
-
-Optionally, parallelize to 8 threads using `-p 8`:
-
-```bash
-sourmash compare -p 8 ecoli_many_sigs/*.sig -o sketches/ecoli_cmp
-```
-
-On ROAR, only do this if you actually requested that many cores for your session — asking for more threads than your allocation will slow the job down rather than speed it up.
-
-## Plot
-
-```bash
-sourmash plot --pdf --labels sketches/ecoli_cmp --output-dir sketches
-```
-
-which will produce files named `ecoli_cmp.matrix.pdf`, `ecoli_cmp.dendro.pdf`, and `ecoli_cmp.hist.pdf` in `sketches/`.
-
-Here's a PNG version:
-
-![E. coli comparison plot](Data/ecoli_cmp.png)
-
-Unlike the sparse reference matrix, this one is dense: every genome shares substantial k-mer content with every other, and the dendrogram on the left picks out clusters of more closely related strains. This is the same `compare` + `plot` machinery you just ran on the 15 references — the only thing that changed is that the input genomes are actually related to one another.
 
 ---
 
