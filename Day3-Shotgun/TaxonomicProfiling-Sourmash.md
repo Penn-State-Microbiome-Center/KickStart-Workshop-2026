@@ -470,7 +470,7 @@ Open `snakemake_output/refs_cmp.matrix.png`. The two-genome *Cloacibacterium cae
 
 ![Reference genome comparison with the added Cloacibacterium genome](Data/refs_cmp_16.matrix.png)
 
-The new *C. normanense* genome lands at about **96.3%** and **96.1%** estimated ANI against the two *C. caeni* isolates, right alongside the 96.1% those two isolates share with each other. And the signal is real rather than an artifact of the `containment^(1/k)` inflation we warned about above: the raw Jaccard for all three *Cloacibacterium* pairs is between 0.17 and 0.19, while every other pair in the matrix is below 0.001. The count of exactly-zero off-diagonal cells goes from 92 of 105 to 105 of 120 — the only two new nonzero cells in the entire matrix are the two *normanense*–*caeni* pairs.
+The new *C. normanense* genome lands at about **96.3%** and **96.1%** estimated ANI against the two *C. caeni* isolates, right alongside the 96.1% those two isolates share with each other. 
 
 That is the whole point of the exercise. You added a file. You re-ran one command. The sketching, the merge, the all-pairs comparison, and the figure all updated themselves, and nothing that did not need to be recomputed was recomputed.
 
