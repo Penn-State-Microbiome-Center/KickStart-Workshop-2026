@@ -1,51 +1,50 @@
-# Day 2: Symbiosis and Amplicon analysis in R
+# Day 2: Symbiosis and Amplicon analysis using Qiime2
 
 ## Morning Lecture:
 Studying Symbiosis through Sequencing (Liana Burghardt) - [pdf](MicrobiomeKickStart_Burghardt_Aug2025.pdf)
 
-## Amplicon Analysis in R: 
+## Amplicon Analysis using Qiime2: 
 ### Resources
 
-[2025 presentations PDF files + code examples](https://pennstateoffice365-my.sharepoint.com/:f:/g/personal/evk5387_psu_edu/EvUN_epjzhtOs8fixwmt7vwB1vqGgXjR2VIcBbQCfU90Qw?e=IDYzIQ) (need PSU authentication to access) 
+[Qiime2](https://amplicon-docs.qiime2.org/en/stable/)
 
-- log onto the portal
+[Qiime2 view](https://view.qiime2.org/)
+
+Guide for amplicon analysis(TBU)
+
+### Analysis
+
+- Log on to the portal
 http://portal.hpc.psu.edu/ 
 
-- start an R session
-  
-Environment Selection: Use custom text field
+- Open the terminal; to do so, click on ">_Open in Terminal"
 
-Environment setup:  
-```
-module use /storage/group/one/default/workshop/2025/modulefiles
-module load gcc R
-```
-
-Account: open  
-Partition: interactive  
-Number of cores: 4  
-Memory per core (in GB): 32  
-Number of hours: 2  
-
-Launch
-
-- In Rstudio
 
 🖥️ in terminal
 
-navigate to work directory
+Request an interactive session in the terminal (here we are requesting 3hours):  
 
-copy data
+```
+salloc -N 1 -n 12 -t 3:00:00 --account=open
+```
+Wait for the terminal prompts that indicate you have the requested resources.
 
-`cp -r /storage/group/one/default/workshop/2025/16s .`
+- Load qiime2 environment in the memory
 
-check that data was copied
+```
+module load anaconda/2023.09
+conda activate /storage/group/one/default/workshop/2026/envs/rachis-qiime2-2026.7
+```
+- create a variable (DAY2) to make the commands shorter and list the files in the variable DAY2
 
-🖥️ in console
+```
+DAY2=/storage/group/one/default/workshop/2026/day2_16S/qiime2
+ls $DAY2
+```
 
-check working directory
+ ⚠️ Follow the commands in the Qiime2 guide. You are going to run the scripts interactively, meaning you will copy and paste from the guide into the terminal.
 
-set working directory to the folder with the data
+
    
 #### **Suggested Reading**
 
@@ -66,19 +65,6 @@ Callahan BJ, Sankaran K, Fukuyama JA et al. Bioconductor Workflow for Microbiome
 Article: [Beyond Normalization: Incorporating Scale Uncertainty in Microbiome and Gene Expression Analysis](https://www.biorxiv.org/content/10.1101/2024.04.01.587602v1.full)
 
 Package: [ALDEx2](https://www.bioconductor.org/packages/release/bioc/html/ALDEx2.html)
-
-## **Required Software**
-
-Software:
-[R and Rstudio](https://cran.rstudio.com/)
-
-Packages: 
-[dada2](https://bioconductor.org/packages/release/bioc/html/dada2.html) , [phyloseq](https://bioconductor.org/packages/release/bioc/html/phyloseq.html), and [tidyverse](https://tidyverse.tidyverse.org/)
-
-#### **Short lectures**
-[Link to an overview of sequencing methodologies](https://psu.mediaspace.kaltura.com/media/Next+Generation+Sequencing/1_12vugl0d)
-
-[Link to an overview of bioinformatics](https://psu.mediaspace.kaltura.com/media/Overview+of+Bioinformatics+and+Diversity+Metrics/1_1ih13k9f)
 
 🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹
 ## 🔹Extra Material🔹
@@ -128,9 +114,9 @@ https://swcarpentry.github.io/shell-novice/
 Riffomonas has great tutorials to get started with R and reproducible research with version control is also a must.
 https://riffomonas.org/
 
-##### 🧬 16S analysis
-**16S analysis in R**<br>
-https://benjjneb.github.io/dada2/tutorial.html<br>
+##### 🧬 16S rRNA analysis
+**Analysis in R**
+https://benjjneb.github.io/dada2/tutorial.html
 
-**16S analysis in Qiime2**<br>
-https://docs.qiime2.org/2021.11/tutorials/overview/
+**Analysis in Qiime2**
+https://amplicon-docs.qiime2.org/en/stable/tutorials/moving-pictures/
