@@ -14,7 +14,7 @@ If you are taking part in the workshop, use the following commands to activate t
 
 ```bash
 module load anaconda/2023.09
-conda activate /storage/group/one/default/workshop/2025/envs/microbiome
+conda activate /storage/group/one/default/workshop/2026/envs/microbiome
 ```
 
 Confirm sourmash is on your path before continuing:

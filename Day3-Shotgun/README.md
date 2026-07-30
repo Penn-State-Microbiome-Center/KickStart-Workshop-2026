@@ -18,7 +18,7 @@
 After that, open a terminal (little black icon on the top bar, next to the firefox icon), and then enter the following commands:
 ```
 module load anaconda/2023.09
-conda activate /storage/group/one/default/workshop/2025/envs/microbiome
+conda activate /storage/group/one/default/workshop/2026/envs/microbiome
 ```
 ### Shotgun metagenomic analysis
 This portion of the workshop will cover a few of the basic computational approaches to studying WGS metagenomic data. 
