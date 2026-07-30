@@ -3,7 +3,7 @@
 Materials for the Fall 2026 PSU One Health Microbiome Center KickStart Workshop.
 
 ## Details
-**Dates**: August 4 - 7, 2025  (Optional intro to Unix/R on August 5th, Full workshop August 6 - 8th)  
+**Dates**: August 4 - 7, 2026  (Optional intro to Unix/R on August 5th, Full workshop August 6 - 8th)  
 **Times**: August 4th: 1pm - 4pm; August 5 - 8th: 9am - 4pm  
 **Location**: AVBS 106 (in person only)
 
