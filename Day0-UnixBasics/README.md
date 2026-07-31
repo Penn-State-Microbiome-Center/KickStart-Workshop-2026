@@ -1,7 +1,7 @@
 # Intro to Unix and Programming
 
 ## Goals
-1. Gain familiarity with Penn State's [Roar Collab computing cluster](https://www.icds.psu.edu/roar-collab-user-guide/). [[slides](https://docs.google.com/presentation/d/19DETLf_q5TNOKtfuY4quXd1mPd7_TJKKXkO96qGcjoQ/edit?usp=sharing)]
+1. Gain familiarity with Penn State's [Roar Collab computing cluster](https://docs.icds.psu.edu). [[slides](https://docs.google.com/presentation/d/19DETLf_q5TNOKtfuY4quXd1mPd7_TJKKXkO96qGcjoQ/edit?usp=sharing)]
 
 2. Learn how to control a computer via command line, including:
 	- moving around the computer 
@@ -15,7 +15,7 @@
 
 
 ## Resources
-- [Roar Collab Users' Guide](https://www.icds.psu.edu/roar-collab-user-guide/)
+- [Roar Collab Users' Guide](https://docs.icds.psu.edu/)
 - [Roar Open OnDemand Portal](https://portal.hpc.psu.edu)
 - [Unix cheat sheet](https://www.alexji.com/UNIXCheatSheet.pdf)
 - [Base R cheat sheet](https://iqss.github.io/dss-workshops/R/Rintro/base-r-cheat-sheet.pdf)
