@@ -14,35 +14,34 @@ Guide for amplicon analysis(TBU)
 
 ### Analysis
 
-- Log on to the portal
+1. Log on to the portal
 http://portal.hpc.psu.edu/ 
 
-- Open the terminal; to do so, click on ">_Open in Terminal"
-
+2. Open the terminal; to do so, click on ">_Open in Terminal"
 
 🖥️ in terminal
 
-Request an interactive session in the terminal (here we are requesting 3hours):  
+3. Request an interactive session in the terminal (here we are requesting 3hours):  
 
 ```
 salloc -N 1 -n 12 -t 3:00:00 --account=open
 ```
 Wait for the terminal prompts that indicate you have the requested resources.
 
-- Load qiime2 environment in the memory
+4. Load the qiime2 environment
 
 ```
 module load anaconda/2023.09
 conda activate /storage/group/one/default/workshop/2026/envs/rachis-qiime2-2026.7
 ```
-- create a variable (DAY2) to make the commands shorter and list the files in the variable DAY2
+5. Create a variable (DAY2) to make the commands shorter and list the files in the variable DAY2
 
 ```
 DAY2=/storage/group/one/default/workshop/2026/day2_16S/qiime2
 ls $DAY2
 ```
 
- ⚠️ Follow the commands in the Qiime2 guide. You are going to run the scripts interactively, meaning you will copy and paste from the guide into the terminal.
+6. Follow the commands in the Qiime2 guide. Please run the scripts interactively, meaning copy and paste from the guide into the terminal.
 
 
    
