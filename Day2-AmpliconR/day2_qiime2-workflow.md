@@ -1,10 +1,7 @@
----
----
----
 
 ------------------------------------------------------------------------
 
-# Day 2: Amplicon analysis using Qiime2
+# Day 2: Amplicon analysis using QIIME 2
 
 **Author**: Veronica Roman-Reyna
 
@@ -22,7 +19,7 @@
 
 ## What You'll Need
 
-- This document open for instructions and commands.
+- This document is open for instructions and commands.
 
 - The terminal.
 
@@ -32,15 +29,15 @@
 
 This workflow assumes that your sequencing data:
 
-- Is for 16S rRNA not for ITS (fungal).
+- Is for 16S rRNA, not for ITS (fungal).
 
 - Samples have been demultiplexed (split into individual per-sample fastq files).
 
-- Non-biological nucleotides have been removed (e.g. primers, adapters, linkers, etc.)
+- Non-biological nucleotides have been removed (e.g., primers, adapters, linkers, etc.)
 
-- Paired-end sequencing data, the forward and reverse fastq files contain reads in matched #order.
+- Paired-end sequencing data: the forward and reverse fastq files contain reads in matched #order.
 
-If these criteria are not true for your data Qiime2 offers other commands and workflows to demultiplex, clean reads, and use other non-bacterial databases.
+If these criteria are not true for your data, Qiime2 offers other commands and workflows to demultiplex, clean reads, and use other non-bacterial databases.
 
 ## Qiime2 file types
 
@@ -131,7 +128,7 @@ conda activate /storage/group/one/default/workshop/2026/envs/rachis-qiime2-2026.
 
 ## Step 2: Import Reads and Metadata
 
-QIIME 2 needs your raw sequencing data and sample information converted into its own artifact format before it can do anything with them. The data is already in the supercomputer and the manisfest has the required information.
+QIIME 2 needs your raw sequencing data and sample information converted into its own artifact format before it can do anything with them. The data is already in the supercomputer, and the manifest has the required information.
 
 **Two supporting files are used here:**
 
@@ -143,13 +140,14 @@ The first command *imports* the demultiplexed paired-end reads into a `.qza` art
 
 The second command creates a visualization of your metadata table so you can double-check it looks correct.
 
-``` {.bash style="gray"}
+``` bash
 qiime tools import \
     --type 'SampleData[PairedEndSequencesWithQuality]' \
     --input-path $DAY2/data-manifest.txt \
     --output-path $WORK/pe-demux.qza \
     --input-format PairedEndFastqManifestPhred33V2
-
+```
+``` bash
 qiime metadata tabulate \
   --m-input-file $DAY2/metadata.tsv \
   --o-visualization $WORK/metadata-viz.qzv
@@ -171,11 +169,11 @@ qiime demux summarize \
 
 🔍 What to look for in the forward and reverse reads:
 
-- How is the read count distribution.
+- How is the read count distribution?
 
-- What is the quality score across a sequence.
+- What is the quality score across a sequence?
 
-🔍 The quality plots helps to:
+🔍 The quality plots help to:
 
 - Get an overview of the read distribution and the quality of data.
 
@@ -216,7 +214,7 @@ qiime dada2 denoise-paired \
 
 - `base-transition-stats.qza`: diagnostic output showing the error model DADA2 used to predict nucleotide substitutions (not covered in this workshop, but useful for troubleshooting).
 
-> ⏱️ This step may take **\~6 minutes**. The terminal will appear to hang, that's normal, it's still working.
+> ⏱️ This step may take **\~6 minutes**. The terminal will appear to hang; that's normal, it's still working.
 
 Tabulate the denoising stats so you can view them:
 
@@ -238,9 +236,9 @@ Understanding `denoising-stats.qzv`:
 
 🔍 What to look for:
 
-- how many reads were retained at each processing step.
+- How many reads were retained at each processing step.
 
-- did you loose a lot of reads or are you retaining more than 80%?
+- Did you lose a lot of reads or are you retaining more than 80%?
 
 ------------------------------------------------------------------------
 
@@ -277,7 +275,7 @@ qiime feature-table tabulate-seqs \
 
 👀 **Download the file** `asv-seqs.qzv` **and upload it to [view.qiime2.org](https://view.qiime2.org/)**.
 
-🔍 Why is this useful: having the sequences can help to identify potential hits and if the taxonomy classifiers are proving false-positives or negatives.
+🔍 Why is this useful: having the sequences can help to identify potential hits and whether the taxonomy classifiers are proving false-positives or negatives.
 
 ------------------------------------------------------------------------
 
@@ -356,7 +354,7 @@ In each Emperor plot, you can color points by any column in your metadata to vis
 
 This step assigns a taxonomic identity (mainly up to genus) to each ASV by comparing it against a reference database. We'll compare two commonly used reference databases: [**SILVA**](https://www.arb-silva.de/) and [**GTDB**](https://gtdb.ecogenomic.org/).
 
-> **Note:** Always double check classifier versions. Mismatched versions can cause errors. These databases are for Qiime2-2026.07 version.
+> **Note:** Always double-check classifier versions. Mismatched versions can cause errors. These databases are for Qiime2-2026.07 version.
 
 ### SILVA classifier for 16S rRNA V4 region.
 
@@ -365,11 +363,13 @@ qiime feature-classifier classify-sklearn \
     --i-classifier $WORK/silva-138-2-v4-classifier.qza \
     --i-reads $WORK/asv-seqs.qza \
     --o-classification $WORK/silva-taxonomy.qza
-
+```
+``` bash
 qiime metadata tabulate \
     --m-input-file $WORK/silva-taxonomy.qza \
     --o-visualization $WORK/silva-taxonomy.qzv
-
+```
+``` bash
 qiime taxa barplot \
     --i-table $WORK/asv-table.qza \
     --i-taxonomy $WORK/silva-taxonomy.qza \
@@ -384,11 +384,13 @@ qiime feature-classifier classify-sklearn \
     --i-classifier $DAY2/gtdb-r232.0-2026.7.0-classifier.qza \
     --i-reads $WORK/asv-seqs.qza \
     --o-classification $WORK/gtdb-taxonomy.qza
-
+```
+``` bash
 qiime metadata tabulate \
     --m-input-file $WORK/gtdb-taxonomy.qza \
     --o-visualization $WORK/gtdb-taxonomy.qzv
-
+```
+``` bash
 qiime taxa barplot \
     --i-table $WORK/asv-table.qza \
     --i-taxonomy $WORK/gtdb-taxonomy.qza \
@@ -410,7 +412,7 @@ qiime taxa barplot \
 
 - Select a Taxonomic level (Level 6 is for genus).
 
-- Select how to sort the samples (e.g. index, time, dpw)
+- Select how to sort the samples (e.g., index, time, dpw)
 
 - You can download the figure file (SVG) or the taxa counts (CSV).
 
@@ -418,11 +420,11 @@ Comparing the SILVA and GTDB results side by side is a good exercise in how refe
 
 ## Step 9: ANCOM-BC2: *An*alysis of *Co*mpositions of *M*icrobiomes with *B*ias *C*orrection *2*
 
-Everything so far has described *how similar samples are* (diversity) or *what's present* (taxonomy). ANCOM-BC2 answers a different question: **which specific features (ASVs/taxa) differ significantly in abundance between groups**, for example, between two timespoints.
+Everything so far has described *how similar samples are* (diversity) or *what's present* (taxonomy). ANCOM-BC2 answers a different question: **which specific features (ASVs/taxa) differ significantly in abundance between groups**, for example, between two time points.
 
-> **What ANCOM-BC2 does, conceptually:** Microbiome sequencing data is *compositional* , read counts are relative to the total reads sequenced for that sample, not absolute abundances in the environment. This means standard statistical tests (built for absolute counts) can give misleading results if applied directly. ANCOM-BC2 corrects for this compositional bias and for uneven sampling depth between samples before testing each feature for a significant association with your variable of interest.
+> **What ANCOM-BC2 does, conceptually:** Microbiome sequencing data is *compositional*, read counts are relative to the total reads sequenced for that sample, not absolute abundances in the environment. This means standard statistical tests (built for absolute counts) can give misleading results if applied directly. ANCOM-BC2 corrects for this compositional bias and for uneven sampling depth between samples before testing each feature for a significant association with your variable of interest.
 >
-> ⚠️ **Before you use it:** ANCOM-BC2 is a plugin in QIIME 2, but like any statistical method, it comes with assumptions (e.g., about how much of the community is expected to change) and limitations. Don't treat it as a black box, differential abundance testing is a genuinely hard problem, and a significant q-value is best treated as a hypothesis worth following up with new samples, not as a final conclusion on its own. It's worth reading the [composition plugin reference](https://amplicon-docs.qiime2.org/en/stable/references/plugins/composition/) to understand what ANCOM-BC2 can and can't tell you before drawing conclusions from your results.
+> ⚠️ **Before you use it:** ANCOM-BC2 is a plugin in QIIME 2, but like any statistical method, it comes with assumptions (e.g., about how much of the community is expected to change) and limitations. Don't treat it as a black box; differential abundance testing is a genuinely hard problem, and a significant q-value is best treated as a hypothesis worth following up with new samples, not as a conclusion on its own. It's worth reading the [composition plugin reference](https://amplicon-docs.qiime2.org/en/stable/references/plugins/composition/) to understand what ANCOM-BC2 can and can't tell you before concluding your results.
 
 ``` bash
 qiime composition ancombc2 \
@@ -430,12 +432,14 @@ qiime composition ancombc2 \
   --m-metadata-file $DAY2/metadata.tsv \
   --p-fixed-effects-formula 'time' \
   --o-ancombc2-output $WORK/ancombc2-output.qza
-
+```
+``` bash
 qiime composition da-barplot \
   --i-data $WORK/ancombc2-output.qza \
   --i-taxonomy $WORK/gtdb-taxonomy.qza \
   --o-visualization $WORK/ancombc2-barplot-gtdb.qzv
-  
+```
+``` bash  
 qiime composition da-barplot \
   --i-data $WORK/ancombc2-output.qza \
   --i-taxonomy $WORK/silva-taxonomy.qza \
@@ -444,9 +448,9 @@ qiime composition da-barplot \
 
 **What's happening in each command:**
 
-- `qiime composition ancombc2` : runs the differential abundance test itself. `--p-fixed-effects-formula 'time'` tells ANCOM-BC2 which metadata column to test features against. Here it's asking does this feature's abundance change significantly with `time`?
+- `qiime composition ancombc2` : runs the differential abundance test itself. `--p-fixed-effects-formula 'time'` tells ANCOM-BC2 which metadata column to test features against. Here it's asking: does this feature's abundance change significantly with `time`?
 
-- `qiime composition da-barplot` (run for each databased used) : turns the raw ANCOM-BC2 results into a readable bar plot of differentially abundant (**da** = differentially abundant) features, once labeled with GTDB or SILVA taxonomy.
+- `qiime composition da-barplot` (run for each database used): turns the raw ANCOM-BC2 results into a readable bar plot of differentially abundant (**da** = differentially abundant) features, once labeled with GTDB or SILVA taxonomy.
 
 👀 **Download the files** `ancombc2-barplot-*.qzv` **and upload each one to [view.qiime2.org](https://view.qiime2.org/)**.
 
@@ -460,6 +464,6 @@ qiime composition da-barplot \
 
 ## 🎉 Congratulations!
 
-You've made it through the full QIIME 2 workflow. From raw paired-end FASTQ files all the way to differential abundance testing. Along the way you imported and quality-checked your reads, denoised them into ASVs with DADA2, built a phylogenetic tree, explored alpha and beta diversity, assigned taxonomy with two different reference databases, and used ANCOM-BC2 to pinpoint which taxa actually differ between groups.
+You've completed the full QIIME 2 workflow. From raw paired-end FASTQ files to differential abundance testing. Along the way you imported and quality-checked your reads, denoised them into ASVs with DADA2, built a phylogenetic tree, explored alpha and beta diversity, assigned taxonomy with two different reference databases, and used ANCOM-BC2 to pinpoint which taxa actually differ between groups.
 
-That's the same core pipeline used in real published microbiome studies, nice work getting through it today!
+That's the same core pipeline used in real published microbiome studies; nice work getting through it today!
