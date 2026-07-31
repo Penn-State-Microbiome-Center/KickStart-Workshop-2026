@@ -10,7 +10,7 @@ Studying Symbiosis through Sequencing (Liana Burghardt) - [pdf](MicrobiomeKickSt
 
 - [Qiime2 view](https://view.qiime2.org/)
 
-- [Guide for amplicon analysis](https://github.com/Penn-State-Microbiome-Center/KickStart-Workshop-2026/blob/main/Day2-AmpliconR/qiime2-PE-reads-tutorial.pdf#:~:text=reads%2Dtutorial.html-,qiime2,-%2DPE%2Dreads%2Dtutorial)
+- [Guide for amplicon analysis]
 
 - Lecture(TBU)
 
@@ -26,7 +26,7 @@ http://portal.hpc.psu.edu/
 3. Request an interactive session in the terminal (here we are requesting 3hours):  
 
 ```
-salloc -N 1 -n 12 -t 3:00:00 --account=open
+salloc -N 1 -n 12 -t 3:00:00 --account=one
 ```
 Wait for the terminal prompts that indicate you have the requested resources.
 
