@@ -45,7 +45,11 @@ ls $DAY2
 
 6. Follow the commands in the Qiime2 guide. Please run the scripts interactively, meaning copy and paste from the guide into the terminal.
 
+Running the script interactively helps you spot errors and follow along. After you’ve tested everything, you can execute all commands from a single script (this file is on Roar and has the extension *.slurm*).
 
+### Visualization
+
+We will use Qiime2 view to see all the files that have the *.qzv* extension
    
 #### **Suggested Reading**
 
