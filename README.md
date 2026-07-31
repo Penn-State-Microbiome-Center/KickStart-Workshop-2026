@@ -22,7 +22,14 @@ Materials for the Fall 2026 PSU One Health Microbiome Center KickStart Workshop.
 
 
 ### TAs:
-- To be announced
+- Auja Bywater
+- Cameron Pauly
+- Dina Memar Moshrefi
+- Elizabeth Daigle
+- Hanh Tran
+- Luana Bresciani
+- Stephanie Won
+- Waleed El Sayed
 
 ## Requirements
 A PSU email and access to Penn State’s Roar Collab system is required prior to the workshop. You can do this by going to https://accounts.aci.ics.psu.edu, and entering your information.  For the purposes of this workshop, please list Emily Davenport (exd44@psu) as your account sponsor and put "2026 Microbiome Center Summer Workshop" into the "Research Description" field of the account request form. 
