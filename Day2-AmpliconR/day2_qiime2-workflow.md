@@ -116,6 +116,8 @@ Load the software environment that contains QIIME 2 and its dependencies:
 
 ``` bash
 module load anaconda/2023.09
+```
+``` bash
 conda activate /storage/group/one/default/workshop/2026/envs/rachis-qiime2-2026.7
 ```
 
