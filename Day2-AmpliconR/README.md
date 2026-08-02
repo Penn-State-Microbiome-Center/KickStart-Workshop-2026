@@ -43,7 +43,7 @@ DAY2=/storage/group/one/default/workshop/2026/day2_16S/qiime2
 ls $DAY2
 ```
 
-6. Follow the commands in the Qiime2 guide. Please run the scripts interactively, meaning copy and paste from the guide into the terminal.
+6. Follow the commands in the Qiime2 guide (day2_qiime2_workflow.md). Please run the scripts interactively, meaning copy and paste from the guide into the terminal.
 
 Running the script interactively helps you spot errors and follow along. After you’ve tested everything, you can execute all commands from a single script (this file is on Roar and has the extension *.slurm*).
 
