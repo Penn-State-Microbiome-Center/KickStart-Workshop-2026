@@ -19,7 +19,7 @@
 
 ## What You'll Need
 
-- This document is open for instructions and commands.
+- This document for instructions and commands. Preferably as a separate tab.
 
 - The terminal.
 
