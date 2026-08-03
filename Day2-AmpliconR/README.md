@@ -10,9 +10,9 @@ Studying Symbiosis through Sequencing (Liana Burghardt) - [pdf](MicrobiomeKickSt
 
 - [Qiime2 view](https://view.qiime2.org/)
 
-- [Guide for amplicon analysis](https://github.com/Penn-State-Microbiome-Center/KickStart-Workshop-2026/edit/main/Day2-AmpliconR/README.md#:~:text=day2_qiime2%2D-,workflow,-.md)
+- [Guide for amplicon analysis](day2_qiime2-workflow.md)
 
-- Lecture(TBU)
+- [mini lecture](Day2_amplicon-VRR.pdf)
 
 ### Analysis
 
