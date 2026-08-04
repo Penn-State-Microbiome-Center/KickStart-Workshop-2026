@@ -1,7 +1,7 @@
 # Day 2: Symbiosis and Amplicon analysis using Qiime2
 
 ## Morning Lecture (9am - 10am):
-Studying Symbiosis through Sequencing (Liana Burghardt) - [pdf](MicrobiomeKickStart_Burghardt_Aug2025.pdf)
+Studying Symbiosis through Sequencing (Liana Burghardt) - [pdf](MicrobiomeKickStart_Burghardt_Aug2026.pdf)
 
 ## Amplicon Analysis using Qiime2 (10am - 4pm): 
 ### Resources
