@@ -17,5 +17,5 @@
 3. Controls/Contamination (Laura Weyrich) - [pdf](2022_KickStartWorkshop_Contamination.pdf)
 4. DNA Extraction/Library Prep (Molly Bletz) - [powerpoint](MicrobiomeKickStarter_DNA_Extraction_Bletz2026.pptx)
 6. Sequencing Technology (Darrell Cockburn) - [pdf](Sequencing_Technology_Cockburn_2024.pdf)
-7. Downstream analysis and other tools (Emily Davenport - slides by Estelle Couradeau) - [powerpoint](kickstart_microbiome_couradeau_2025.pptx)
+7. Downstream analysis and other tools (Emily Davenport - slides by Estelle Couradeau) - [powerpoint](kickstart_microbiome_couradeau_2026.pptx)
 8. Final thougths and general discussion
