@@ -54,7 +54,7 @@ QIIME2 stores data and results in special zipped archive formats: `.qza` and `.q
 Request compute resources from the cluster's job scheduler (SLURM) so you have a dedicated space to run QIIME 2:
 
 ``` bash
-salloc -N 1 -n 12 -t 3:00:00 --account=one
+salloc -N 1 -n 2 -t 4:00:00 --account=one_sc_default
 ```
 
 **What this does:**
