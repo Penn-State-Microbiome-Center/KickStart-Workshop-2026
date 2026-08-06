@@ -21,7 +21,7 @@
 
 - This document for instructions and commands. Preferably as a separate tab.
 
-- The terminal.
+- The terminal. Log on to the portal http://portal.hpc.psu.edu/
 
 - A second browser tab open with [QIIME 2 View](https://view.qiime2.org/) — this is where you'll upload `.qzv` visualization files to inspect your results.
 
@@ -49,12 +49,15 @@ QIIME2 stores data and results in special zipped archive formats: `.qza` and `.q
 
 ------------------------------------------------------------------------
 
-## Starting an Interactive Session
+## Starting an Session
 
-Request compute resources from the cluster's job scheduler (SLURM) so you have a dedicated space to run QIIME 2:
+**Option 1:** request an [Interactive Desktop](https://portal.hpc.psu.edu/pun/sys/dashboard/batch_connect/sys/bc_desktop/rc/session_contexts/new)
+Based on today workshop, this might last longer than the second option.
+
+**Option 2:** Request compute resources from the cluster's job scheduler (SLURM) so you have a dedicated space to run QIIME 2:
 
 ``` bash
-salloc -N 1 -n 2 -t 4:00:00 --account=one_sc_default
+salloc -N 1 -n 3 -t 4:00:00 --account=one_sc_default
 ```
 
 **What this does:**
@@ -62,11 +65,11 @@ salloc -N 1 -n 2 -t 4:00:00 --account=one_sc_default
 | Flag            | Meaning                            |
 |-----------------|------------------------------------|
 | `-N 1`          | Request 1 compute node             |
-| `-n 2`         | Request 2 CPU tasks/cores         |
+| `-n 3`         | Request 3 CPU tasks/cores         |
 | `-t 4:00:00`    | Reserve the session for 4 hours    |
 | `--account=one_sc_default` | Bill the job to the `one_sc_default` account |
 
-> ⏲️ **About the `-t` (time) flag:** 3 hours is just a suggestion, since it comfortably covers the first part of today's session before lunch break. Feel free to request more or less time. The important part is what happens at the end of that window: **once the time limit is reached, your session ends automatically and any jobs still running at that moment are interrupted**.
+> ⏲️ **About the `-t` (time) flag:** 4 hours is just a suggestion, since it comfortably covers the first part of today's session before lunch break. Feel free to request more or less time. The important part is what happens at the end of that window: **once the time limit is reached, your session ends automatically and any jobs still running at that moment are interrupted**.
 >
 > ⚠️ **Important:** Once you're in an interactive session, **do not close the terminal window**. Closing it ends the session and erases everything held in memory, including any variables and activated environments you've set up. If it closes, you'll need to start over from this step.
 
@@ -155,6 +158,9 @@ qiime metadata tabulate \
   --o-visualization $WORK/metadata-viz.qzv
 ```
 
+> **Note:**  if you are using a PC (Windows OS) the `\` might not work and would look like you just type the first line of the command and press enter. Two solutions:
+> - copy and paste each line in the terminal,
+> - copy the command to NotePad and edit it to keep the command continious. Then copy and paste it in the terminal. 
 ------------------------------------------------------------------------
 
 ## Step 3: Summarize the Imported Data
@@ -469,3 +475,5 @@ qiime composition da-barplot \
 You've completed the full QIIME 2 workflow. From raw paired-end FASTQ files to differential abundance testing. Along the way you imported and quality-checked your reads, denoised them into ASVs with DADA2, built a phylogenetic tree, explored alpha and beta diversity, assigned taxonomy with two different reference databases, and used ANCOM-BC2 to pinpoint which taxa actually differ between groups.
 
 That's the same core pipeline used in real published microbiome studies; nice work getting through it today!
+
+If all the steps worked for you, you could copy the script `qiime_PE.slurm` to your directory, edit and run it using `sbatch` instead of doing it interactively. 
