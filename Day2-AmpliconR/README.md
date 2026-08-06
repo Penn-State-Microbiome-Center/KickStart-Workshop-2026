@@ -26,7 +26,7 @@ http://portal.hpc.psu.edu/
 3. Request an interactive session in the terminal (here we are requesting 3hours):  
 
 ```
-salloc -N 1 -n 2 -t 4:00:00 --account=one_sc_default
+salloc -N 1 -n 3 -t 4:00:00 --account=one_sc_default
 ```
 Wait for the terminal prompts that indicate you have the requested resources.
 
