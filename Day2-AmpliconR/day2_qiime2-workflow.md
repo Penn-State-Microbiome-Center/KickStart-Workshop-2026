@@ -62,9 +62,9 @@ salloc -N 1 -n 2 -t 4:00:00 --account=one_sc_default
 | Flag            | Meaning                            |
 |-----------------|------------------------------------|
 | `-N 1`          | Request 1 compute node             |
-| `-n 12`         | Request 12 CPU tasks/cores         |
-| `-t 3:00:00`    | Reserve the session for 3 hours    |
-| `--account=one` | Bill the job to the `open` account |
+| `-n 2`         | Request 2 CPU tasks/cores         |
+| `-t 4:00:00`    | Reserve the session for 4 hours    |
+| `--account=one_sc_default` | Bill the job to the `one_sc_default` account |
 
 > ⏲️ **About the `-t` (time) flag:** 3 hours is just a suggestion, since it comfortably covers the first part of today's session before lunch break. Feel free to request more or less time. The important part is what happens at the end of that window: **once the time limit is reached, your session ends automatically and any jobs still running at that moment are interrupted**.
 >
