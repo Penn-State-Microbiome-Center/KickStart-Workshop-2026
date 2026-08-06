@@ -362,7 +362,7 @@ This step assigns a taxonomic identity (mainly up to genus) to each ASV by compa
 
 ``` bash
 qiime feature-classifier classify-sklearn \
-    --i-classifier $WORK/silva-138-2-v4-classifier.qza \
+    --i-classifier $DAY2/silva-138-2-v4-classifier.qza \
     --i-reads $WORK/asv-seqs.qza \
     --o-classification $WORK/silva-taxonomy.qza
 ```
