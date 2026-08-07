@@ -369,6 +369,11 @@ rule plot:
         "sourmash plot --labels {input.matrix} --output-dir {params.outdir}"
 ```
 
+You can visualize the compute DAG (directed acyclic graph) via:
+```
+snakemake --dag | dot -Tsvg > dag.svg
+```
+
 Four ideas are doing all the work here:
 
 | Concept | What it does |
