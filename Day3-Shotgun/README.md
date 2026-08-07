@@ -1,4 +1,10 @@
-# Day 3: Metagenomics
+# Day 3: Metagenomics & Reproducibility
+
+## Reproducibility and why it's important
+
+We'll start the day with a short primer on a specific workflow management tool called Snakemake before we dive into our metagenomics analysis.
+
+**Snakemake: A workflow management tool for reproducible and scalable workflows** (Dr. Jess Grembi) — [slides (PDF)](presentations/2026_Aug_OHMCKickstart_Snakemake.pdf)
 
 ## Whole genome shotgun metagenomics analysis
 
