@@ -262,8 +262,14 @@ You should see a plot that looks like:
 
 ---
 
-# A detour: automating this with Snakemake
 
+# Reproducibility and why it's important
+
+We'll pause here for a short primer on a specific workflow management tool called Snakemake .
+
+**Snakemake: A workflow management tool for reproducible and scalable workflows** (Dr. Jess Grembi) — [slides (PDF)](presentations/2026_Aug_OHMCKickstart_Snakemake.pdf)
+
+## Automating your Sourmash work with Snakemake
 Everything so far has been commands typed by hand, in order, once. That is fine for a tutorial. It stops being fine the moment a collaborator hands you a sixteenth genome, because now you have to remember which commands to re-run, in what order, and which outputs are quietly stale. This is the single most common source of irreproducible results in bioinformatics: not a bad algorithm, but a plot built from an out-of-date intermediate file.
 
 **Snakemake** is a workflow manager that solves this. You describe your analysis as a set of **rules**, each declaring its `input` files, its `output` files, and the `shell` command that turns one into the other. You never specify an order. Snakemake reads the rules, notices that one rule's output is another's input, and builds the dependency graph itself. Then, given a target you want, it works *backwards* and runs only the steps whose outputs are missing or older than their inputs.
