@@ -5,9 +5,9 @@ The [README](https://github.com/KoslickiLab/YACHT/blob/main/README.md) documenta
 
 ## YACHT: a brief description
 YACHT stands for **Y**es/No **A**nswers to **C**ommunity membership via **H**ypothesis **T**esting. It is a mathematically rigorous hypothesis test that determines the presence or absence of each genome from a reference database in a given metagenomic sample under user-defined threshold values. Specifically, the user is required to provide the following values in addition to a reference database and an unprocessed metagenomic sequencing sample: 
-1. a false negative rate $a$ which controls the sensitivity of the method. 
-1. 2. A value $A$ that indicates the threshold of Average Nucleotide Identity (ANI) above which two organisms will be considered biologically identical. 
-2. 3. the coverage $c$ needed for a given microbe's genome to be considered present in the sample. 
+1. A false negative rate $a$ which controls the sensitivity of the method. 
+2. A value $A$ that indicates the threshold of Average Nucleotide Identity (ANI) above which two organisms will be considered biologically identical. 
+3. The coverage $c$ needed for a given microbe's genome to be considered present in the sample. 
  
 YACHT then outputs a file indicating the presence and absence of each of the organisms among those in the 
 reference database in the sample. For more detailed explanation of the method, refer to the associated [publication](https://doi.org/10.1093/bioinformatics/btae047).
