@@ -8,7 +8,7 @@
 1. Nagivate to [portal.hpc.psu.edu](https://portal.hpc.psu.edu/)
 2. In the "Interactive Apps", choose "Interactive Desktop"
 3. For account, select "read_crch_l1exd44"
-4. For partition, select "open"
+4. For partition, select "basic"
 5. Under "Number of hours", select 10
 6. Under that box, there's a little tix box that says "Enable advanced Slurm options." Tix that box
 7. ~In the text box that pops up, leave the line that says "--partition=sla-prio". Add another line that says "--mem=64G"~
