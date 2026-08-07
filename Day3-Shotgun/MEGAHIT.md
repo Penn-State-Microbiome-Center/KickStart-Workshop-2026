@@ -34,7 +34,7 @@ cd ..
 MEGAHIT is already installed in the OnDemand environment, and you can activate it via:
 ```
 module load anaconda/2023.09
-conda activate /storage/group/one/default/workshop/2025/envs/megahit/
+conda activate /storage/group/one/default/workshop/2026/envs/megahit/
 ```
 
 ## Usage
@@ -145,7 +145,7 @@ a reference though, you can still use it to gain some insight into your assembly
 
 QUAST comes pre-installed in the OnDemand system and can be activated via:
 ```bash
-conda activate /storage/group/one/default/workshop/2025/envs/assembly/
+conda activate /storage/group/one/default/workshop/2026/envs/assembly/
 ```
 
 ### Running QUAST
