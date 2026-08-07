@@ -488,7 +488,16 @@ That is the whole point of the exercise. You added a file. You re-ran one comman
 | `--cores N` | Required. Sets how many jobs run concurrently. |
 | `-p` | Prints the actual shell command for each job, which is how you catch a mis-quoted parameter. |
 
-Snakemake goes considerably further than this — per-rule conda environments, cluster and cloud submission (it can hand each job to Slurm on Roar for you), config files, logging, and containerization. The [Snakemake documentation](https://snakemake.readthedocs.io/) and its [official tutorial](https://snakemake.readthedocs.io/en/stable/tutorial/tutorial.html) are the place to go next.
+Snakemake goes considerably further than this — per-rule conda environments, 
+cluster and cloud submission (it can hand each job to Slurm on Roar for you), 
+config files, logging, and containerization. A few places to go next:
+
+- [Snakemake documentation](https://snakemake.readthedocs.io/)
+- [Official tutorial](https://snakemake.readthedocs.io/en/stable/tutorial/tutorial.html)
+- [Snakemake Workflow Catalog](https://snakemake.github.io/snakemake-workflow-catalog)
+- [Carpentries lesson](https://carpentries-incubator.github.io/snakemake-novice-bioinformatics/)
+- [Snakemake terminology guide](https://medium.com/@mandhri.abeysooriya/snakemake-terms-you-will-meet-cheat-sheet-631d8f234817)
+- [Snakemake wrappers](https://snakemake-wrappers.readthedocs.io/en/stable/)
 
 ---
 
