@@ -20,6 +20,11 @@ After that, open a terminal (little black icon on the top bar, next to the firef
 module load anaconda/2023.09
 conda activate /storage/group/one/default/workshop/2026/envs/microbiome
 ```
+### Presentation slides
+The slides for Dr. Koslicki's presentation are [here](presentations/Main%20slides.pptx).
+
+The slides for Dr. Grembi's presentation are [here](presentations/2026_Aug_OHMCKickstart_Snakemake.pptx).
+
 ### Shotgun metagenomic analysis
 This portion of the workshop will cover a few of the basic computational approaches to studying WGS metagenomic data. 
 In contrast to 16S rRNA studies (which have platforms like QIIME), there is no agreed-upon "all-in-one" analysis platform for WGS metagenomic analysis.
